@@ -14,9 +14,9 @@
 
 # Variables
 
-readonly ADMIN_INTERFACE_GIT_URL="https://github.com/pi-hole/AdminLTE.git"
+readonly ADMIN_INTERFACE_GIT_URL="https://github.com/orttez/AdminLTE.git"
 readonly ADMIN_INTERFACE_DIR="/var/www/html/admin"
-readonly PI_HOLE_GIT_URL="https://github.com/pi-hole/pi-hole.git"
+readonly PI_HOLE_GIT_URL="https://github.com/orttez/pi-hole.git"
 readonly PI_HOLE_FILES_DIR="/etc/.pihole"
 
 PH_TEST=true
@@ -78,7 +78,7 @@ GitCheckUpdateAvail() {
 FTLcheckUpdate() {
 
 	local FTLversion=$(/usr/bin/pihole-FTL tag)
-	local FTLlatesttag=$(curl -sI https://github.com/pi-hole/FTL/releases/latest | grep 'Location' | awk -F '/' '{print $NF}' | tr -d '\r\n')
+	local FTLlatesttag=$(curl -sI https://github.com/orttez/FTL/releases/latest | grep 'Location' | awk -F '/' '{print $NF}' | tr -d '\r\n')
 
 	if [[ "${FTLversion}" != "${FTLlatesttag}" ]]; then
 		return 0
@@ -95,7 +95,7 @@ main() {
   #This is unlikely
   if ! is_repo "${PI_HOLE_FILES_DIR}" ; then
     echo "::: Critical Error: Core Pi-hole repo is missing from system!"
-    echo "::: Please re-run install script from https://github.com/pi-hole/pi-hole"
+    echo "::: Please re-run install script from https://github.com/orttez/pi-hole"
     exit 1;
   fi
 
@@ -117,7 +117,10 @@ main() {
     echo "::: FTL:            up to date"
   fi
 
-  if ${FTL_update}; then
+  # Logic: Don't update FTL when there is a core update available
+  # since the core update will run the installer which will itself
+  # re-install (i.e. update) FTL
+  if ${FTL_update} && ! ${core_update}; then
     echo ":::"
     echo "::: FTL out of date"
     FTLdetect
@@ -127,7 +130,7 @@ main() {
   if [[ ${INSTALL_WEB} == true ]]; then
     if ! is_repo "${ADMIN_INTERFACE_DIR}" ; then
       echo "::: Critical Error: Web Admin repo is missing from system!"
-      echo "::: Please re-run install script from https://github.com/pi-hole/pi-hole"
+      echo "::: Please re-run install script from https://github.com/orttez/pi-hole"
       exit 1;
     fi
 
@@ -194,21 +197,21 @@ main() {
   if [[ "${web_update}" == true ]]; then
     web_version_current="$(/usr/local/bin/pihole version --admin --current)"
     echo ":::"
-    echo "::: Web Admin version is now at ${web_version_current}"
+    echo "::: Web Admin version is now at ${web_version_current/* v/v}}"
     echo "::: If you had made any changes in '/var/www/html/admin/', they have been stashed using 'git stash'"
   fi
 
   if [[ "${core_update}" == true ]]; then
     pihole_version_current="$(/usr/local/bin/pihole version --pihole --current)"
     echo ":::"
-    echo "::: Pi-hole version is now at ${pihole_version_current}"
+    echo "::: Pi-hole version is now at ${pihole_version_current/* v/v}}"
     echo "::: If you had made any changes in '/etc/.pihole/', they have been stashed using 'git stash'"
   fi
 
   if [[ ${FTL_update} == true ]]; then
-    FTL_version_current="$(/usr/bin/pihole-FTL tag)"
+    FTL_version_current="$(/usr/local/bin/pihole version --ftl --current)"
     echo ":::"
-    echo "::: FTL version is now at ${FTL_version_current}"
+    echo "::: FTL version is now at ${FTL_version_current/* v/v}}"
     start_service pihole-FTL
     enable_service pihole-FTL
   fi

@@ -31,7 +31,7 @@ Digital Ocean helps with our infrastructure, but our developers are all voluntee
 
 ### One-Step Automated Install
 1.  Install a [supported operating system](https://discourse.pi-hole.net/t/hardware-software-requirements/273/1)
-2.  Run the command below (it downloads [this script](https://github.com/pi-hole/pi-hole/blob/master/automated%20install/basic-install.sh) in case you want to read over it first!)
+2.  Run the command below (it downloads [this script](https://github.com/orttez/pi-hole/blob/master/automated%20install/basic-install.sh) in case you want to read over it first!)
 
 ### `curl -sSL https://install.pi-hole.net | bash`
 
@@ -41,7 +41,7 @@ _If you wish to read over the script before running it, run `nano basic-install.
 ##### Clone our repository and run the automated installer from your device.
 
 ```
-git clone --depth 1 https://github.com/pi-hole/pi-hole.git Pi-hole
+git clone --depth 1 https://github.com/orttez/pi-hole.git Pi-hole
 cd Pi-hole/automated\ install/
 bash basic-install.sh
 ```
@@ -65,7 +65,7 @@ Once installed, [configure your router to have **DHCP clients use the Pi as thei
 
 -   [Users Forum](https://discourse.pi-hole.net/)
 -   [FAQs](https://discourse.pi-hole.net/c/faqs)
--   [Wiki](https://github.com/pi-hole/pi-hole/wiki)
+-   [Wiki](https://github.com/orttez/pi-hole/wiki)
 -   ![Twitter](https://assets.pi-hole.net/static/twitter.png) [Tweet @The_Pi_Hole](https://twitter.com/The_Pi_Hole)
 -   ![Reddit](https://assets.pi-hole.net/static/reddit.png) [Reddit /r/pihole](https://www.reddit.com/r/pihole/)
 -   ![YouTube](https://assets.pi-hole.net/static/youtube.png)  [Pi-hole channel](https://www.youtube.com/channel/UCT5kq9w0wSjogzJb81C9U0w)
@@ -77,7 +77,7 @@ The Pi-hole™ is an **advertising-aware DNS/Web server**. If an ad domain is qu
 
 ### Gravity
 
-The [gravity.sh](https://github.com/pi-hole/pi-hole/blob/master/gravity.sh) does most of the magic. The script pulls in ad domains from many sources and compiles them into a single list of [over 1.6 million entries](http://jacobsalmela.com/block-millions-ads-network-wide-with-a-raspberry-pi-hole-2-0) (if you decide to use the [mahakala list](https://github.com/pi-hole/pi-hole/commit/963eacfe0537a7abddf30441c754c67ca1e40965)). This script is controlled by the `pihole` command. Please run `pihole -h` to see what commands can be run via `pihole`.
+The [gravity.sh](https://github.com/orttez/pi-hole/blob/master/gravity.sh) does most of the magic. The script pulls in ad domains from many sources and compiles them into a single list of [over 1.6 million entries](http://jacobsalmela.com/block-millions-ads-network-wide-with-a-raspberry-pi-hole-2-0) (if you decide to use the [mahakala list](https://github.com/orttez/pi-hole/commit/963eacfe0537a7abddf30441c754c67ca1e40965)). This script is controlled by the `pihole` command. Please run `pihole -h` to see what commands can be run via `pihole`.
 
 
 
@@ -87,7 +87,7 @@ The automated install is only for a clean install of a Debian family or Fedora b
 
 ### Web Interface
 
-The [Web interface](https://github.com/pi-hole/AdminLTE#pi-hole-admin-dashboard) will be installed automatically so you can view stats and change settings. You can find it at:
+The [Web interface](https://github.com/orttez/AdminLTE#pi-hole-admin-dashboard) will be installed automatically so you can view stats and change settings. You can find it at:
 
 `http://192.168.1.x/admin/index.php` or `http://pi.hole/admin`
 
@@ -95,9 +95,9 @@ The [Web interface](https://github.com/pi-hole/AdminLTE#pi-hole-admin-dashboard)
 
 ### Whitelist and blacklist
 
-Domains can be whitelisted and blacklisted using either the web interface or the command line. See [the wiki page](https://github.com/pi-hole/pi-hole/wiki/Whitelisting-and-Blacklisting) for more details
+Domains can be whitelisted and blacklisted using either the web interface or the command line. See [the wiki page](https://github.com/orttez/pi-hole/wiki/Whitelisting-and-Blacklisting) for more details
 <p align="center">
-<a href=https://github.com/pi-hole/pi-hole/wiki/Whitelisting-and-Blacklisting><img src="https://assets.pi-hole.net/static/whitelist212.png"></a>
+<a href=https://github.com/orttez/pi-hole/wiki/Whitelisting-and-Blacklisting><img src="https://assets.pi-hole.net/static/whitelist212.png"></a>
 </p>
 
 ### Settings
@@ -135,7 +135,7 @@ The same output can be achieved on the CLI by running `chronometer.sh -j`
 
 ## Real-time Statistics
 
-You can view [real-time stats](https://discourse.pi-hole.net/t/how-do-i-view-my-pi-holes-stats-over-ssh-or-on-an-lcd-using-chronometer/240) via `ssh` or on an [2.8" LCD screen](http://amzn.to/1P0q1Fj). This is accomplished via [`chronometer.sh`](https://github.com/pi-hole/pi-hole/blob/master/advanced/Scripts/chronometer.sh). ![Pi-hole LCD](http://i.imgur.com/nBEqycp.jpg)
+You can view [real-time stats](https://discourse.pi-hole.net/t/how-do-i-view-my-pi-holes-stats-over-ssh-or-on-an-lcd-using-chronometer/240) via `ssh` or on an [2.8" LCD screen](http://amzn.to/1P0q1Fj). This is accomplished via [`chronometer.sh`](https://github.com/orttez/pi-hole/blob/master/advanced/Scripts/chronometer.sh). ![Pi-hole LCD](http://i.imgur.com/nBEqycp.jpg)
 
 ## Pi-hole™ Projects
 
@@ -156,6 +156,7 @@ You can view [real-time stats](https://discourse.pi-hole.net/t/how-do-i-view-my-
 -   [Let your blink1 device blink when Pi-hole filters ads](https://gist.github.com/elpatron68/ec0b4c582e5abf604885ac1e068d233f)
 -   [Pi-hole Prometheus exporter](https://github.com/nlamirault/pihole_exporter): a [Prometheus](https://prometheus.io/) exporter for Pi-hole
 -   [Pi-hole Droid - open source Android client](https://github.com/friimaind/pi-hole-droid)
+-   [Windows DNS Swapper](https://github.com/roots84/DNS-Swapper), see [#1400](https://github.com/orttez/pi-hole/issues/1400)
 
 ## Coverage
 
